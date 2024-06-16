@@ -1,7 +1,14 @@
 <template>
- <div class="about">
-    <h1>Booking view</h1>
-  </div>
+  <Card class="p-1">
+    <template #title>4 - Juan Carrizo</template>
+    <template #content>
+      <p class="m-0">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error
+        repudiandae numquam deserunt quisquam repellat libero asperiores earum nam nobis, culpa
+        ratione quam perferendis esse, cupiditate neque quas!
+      </p>
+    </template>
+  </Card>
 </template>
 
 <script setup></script>
