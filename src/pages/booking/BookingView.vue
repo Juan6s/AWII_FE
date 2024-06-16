@@ -6,7 +6,7 @@
         <DataTable :value="bookings" removableSort  :rows="5" :paginator="true" responsiveLayout="scroll">
           <Column
             field="guestName"
-            header="Nombre de reservista"
+            header="Nombre de rWeservista"
             :sortable="true"
             style="width: 15%"
           ></Column>
