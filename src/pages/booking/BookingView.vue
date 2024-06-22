@@ -2,9 +2,6 @@
   <Toolbar class="mb-6">
     <template #start>
       <Button label="Nueva" icon="pi pi-plus" severity="success" class="mr-2" @click="openNew" />
-      <Button label="Editar" icon="pi pi-plus" severity="success" class="mr-2" @click="openNew" />
-      <Button label="Borrar" icon="pi pi-trash" severity="danger" @click="confirmDeleteSelected"
-        :disabled="!selectedBookings || !selectedBookings.length" />
     </template>
   </Toolbar>
 
