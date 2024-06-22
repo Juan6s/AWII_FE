@@ -3,7 +3,7 @@
 
 import { createApp } from 'vue';
 import App from './App.vue';
-import {router} from './router.js';
+import { router } from './router.js';
 
 import PrimeVue from 'primevue/config';
 import AutoComplete from 'primevue/autocomplete';
@@ -108,16 +108,16 @@ import TreeSelect from 'primevue/treeselect';
 import TreeTable from 'primevue/treetable';
 import TriStateCheckbox from 'primevue/tristatecheckbox';
 import VirtualScroller from 'primevue/virtualscroller';
-
+import Todo from './components/Todo.vue';
 
 import './assets/styles.scss';
-import 'primevue/resources/themes/aura-light-green/theme.css'
-import 'primeicons/primeicons.css'
+import 'primevue/resources/themes/aura-light-green/theme.css';
+import 'primeicons/primeicons.css';
 
-const app = createApp(App)
+const app = createApp(App);
 
-app.use(PrimeVue)
-app.use(router)
+app.use(PrimeVue);
+app.use(router);
 app.use(PrimeVue, { ripple: true });
 app.use(ToastService);
 app.use(DialogService);
@@ -127,7 +127,6 @@ app.directive('tooltip', Tooltip);
 app.directive('badge', BadgeDirective);
 app.directive('ripple', Ripple);
 app.directive('styleclass', StyleClass);
-
 
 app.component('Accordion', Accordion);
 app.component('AccordionTab', AccordionTab);
@@ -140,6 +139,7 @@ app.component('Breadcrumb', Breadcrumb);
 app.component('Button', Button);
 app.component('ButtonGroup', ButtonGroup);
 app.component('Calendar', Calendar);
+app.component('Todo', Todo);
 app.component('Card', Card);
 // app.component('Chart', Chart);
 app.component('Carousel', Carousel);
@@ -225,5 +225,4 @@ app.component('TreeTable', TreeTable);
 app.component('TriStateCheckbox', TriStateCheckbox);
 app.component('VirtualScroller', VirtualScroller);
 
-
-app.mount('#app')
+app.mount('#app');

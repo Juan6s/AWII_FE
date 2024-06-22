@@ -4,6 +4,7 @@ import AppLayout from './layout/AppLayout.vue';
 import GuestView from './pages/guest/GuestView.vue';
 import BookingView from './pages/booking/BookingView.vue';
 import HousingView from './pages/housing/HousingView.vue';
+import Todo from './components/Todo.vue';
 
 export const PATHS = {
   ROUTE_GUEST: '/inquilinos',
@@ -19,6 +20,7 @@ export const router = createRouter({
       name: 'dahboard',
       component: AppLayout,
       children: [
+        {path: '/', component:Todo },
         { path: PATHS.ROUTE_BOOKING, component: BookingView },
         { path: PATHS.ROUTE_GUEST, component: GuestView },
         { path: PATHS.ROUTE_HOUSING, component: HousingView }
