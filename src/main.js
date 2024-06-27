@@ -116,6 +116,12 @@ import 'primeicons/primeicons.css';
 
 const app = createApp(App);
 
+router.beforeEach(function (to, from, next) {
+    console.log(to)
+    console.log(from)
+    console.log(auth)
+  })
+
 app.use(PrimeVue);
 app.use(router);
 app.use(PrimeVue, { ripple: true });
