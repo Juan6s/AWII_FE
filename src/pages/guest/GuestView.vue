@@ -3,11 +3,11 @@
     <div class="col-4" v-for="guest in guests" :key="guest.id">
       <Card class="p-mb-3">
         <template #title>
-          {{ guest.nombre.toUpperCase() }}
+          {{ guest.name.toUpperCase() }}
         </template>
         <template #content>
           <p>
-            <b>Telefono:</b> {{ guest.telefono }}
+            <b>Telefono:</b> {{ guest.phone }}
           </p>
           <p>
             <b>DNI:</b> {{ guest.dni }}

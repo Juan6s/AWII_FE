@@ -51,14 +51,6 @@
             </template>
           </Column>
 
-          <Column field="numberGuests" header="Inquilinos" :sortable="true" style="width: 10%"> <template
-              #body="{ data }">
-              {{ data.numberGuests }}
-            </template>
-            <template #filter="{ filterModel, filterCallback }">
-              <InputText v-model="filterModel.value" type="text" @input="filterCallback()" placeholder="Inquilinos" />
-            </template>
-          </Column>
         </DataTable>
       </div>
     </div>
@@ -107,7 +99,7 @@ onMounted(() => {
   });
 
   getHousingData().then((housingData) => {
-    housings.value = housingData.map(housing => { return { id: housing.id, name: housing.nombre } })
+    housings.value = housingData.map(housing => { return { id: housing._id, name: housing.name } })
   })
 
 });
@@ -135,11 +127,10 @@ async function mapData() {
 
   return bookingData.map((booking) => {
     return {
-      admissionDate: booking.fechas.ingreso,
-      exitDate: booking.fechas.salida,
-      guestName: guestsData.find((guest) => guest.id === booking.id_inquilino)?.nombre,
-      housingName: housingData.find((housing) => housing.id === booking.id_hospedaje)?.nombre,
-      numberGuests: booking.acompanantes.length + 1
+      admissionDate: booking.checkInDate,
+      exitDate: booking.checkOutDate,
+      guestName: guestsData.find((guest) => guest._id === booking.guest)?.name,
+      housingName: housingData.find((housing) => housing._id === booking.housing)?.name,
     };
   });
 }
@@ -152,10 +143,10 @@ const openNew = () => {
 
 const saveBooking = async () => {
   const bookingDetails = booking.value
-  console.log(bookingDetails)
   await createBooking(bookingDetails.dates[0], bookingDetails.dates[1], bookingDetails.guest.id, bookingDetails.housing.id)
+
   await mapData()
-  productDialog.value= false;
+  productDialog.value = false;
   submitted.value = true;
 }
 
@@ -163,11 +154,11 @@ const saveBooking = async () => {
 const search = async (event) => {
   const guestsData = await getGuestData();
   const filteredGuest = guestsData.filter((guest) => {
-    return guest.nombre.toLowerCase().startsWith(event.query.toLowerCase())
+    return guest.name.toLowerCase().startsWith(event.query.toLowerCase())
   })
 
   guests.value = filteredGuest.map((guest) => {
-    return { id: guest.id, name: guest.nombre }
+    return { id: guest._id, name: guest.name }
   })
 
 }

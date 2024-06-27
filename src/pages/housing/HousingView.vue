@@ -3,14 +3,14 @@
     <div class="col-4" v-for="house in housings" :key="house.id">
       <Card class="p-mb-3">
         <template #title>
-          {{ house.nombre.toUpperCase() }}
+          {{ house.name.toUpperCase() }}
         </template>
         <template #content>
           <p>
-            <b>Ubicacion:</b> {{ house.ubicacion }}
+            <b>Ubicacion:</b> {{ house.location }}
           </p>
           <p>
-            <b>Precio Noche:</b> ${{ house.precio_noche }}
+            <b>Precio Noche:</b> ${{ house.pricing }}
           </p>
 
         </template>
