@@ -3,7 +3,7 @@
 
 import { createApp } from 'vue';
 import App from './App.vue';
-import { router } from './router.js';
+import { createBarloventoRouter } from './router.js';
 
 import PrimeVue from 'primevue/config';
 import AutoComplete from 'primevue/autocomplete';
@@ -114,13 +114,11 @@ import './assets/styles.scss';
 import 'primevue/resources/themes/aura-light-green/theme.css';
 import 'primeicons/primeicons.css';
 
-const app = createApp(App);
 
-router.beforeEach(function (to, from, next) {
-    console.log(to)
-    console.log(from)
-    console.log(auth)
-  })
+
+const app = createApp(App);
+export const router = createBarloventoRouter()
+
 
 app.use(PrimeVue);
 app.use(router);

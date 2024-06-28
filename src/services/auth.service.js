@@ -1,13 +1,16 @@
 import axios from 'axios';
 
 
-async function login(email, password){
+export async function login(email, password){
     const data = {email, password}
     const response = await axios.post("http://localhost:3000/login", data);
-
-    localStorage.setItem("auth", response)
+    localStorage.setItem("auth", response.data)
 }
 
-async function getToken(){
-    localStorage.getItem("auth")
+export async function getToken(){
+    return localStorage.getItem("auth")
+}
+
+export async function deleteToken(){
+    localStorage.removeItem("auth")
 }
