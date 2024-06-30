@@ -4,7 +4,7 @@
             <div class="text-center mb-5">
                 <div class="text-900 text-3xl font-medium mb-3">Bienvenido</div>
                 <span class="text-600 font-medium line-height-3">Sin cuenta?</span>
-                <a class="font-medium no-underline ml-2 text-blue-500 cursor-pointer">Registrate!</a>
+                <a class="font-medium no-underline ml-2 text-blue-500 cursor-pointer"><RouterLink to="/register">Registrate!</RouterLink></a>
             </div>
 
             <div>
@@ -28,6 +28,7 @@
 <script setup>
 import { router } from '@/main';
 import { login } from '@/services/auth.service';
+import { RouterLink } from 'vue-router';
 import { ref } from 'vue';
 const email = ref("")
 const password = ref("")

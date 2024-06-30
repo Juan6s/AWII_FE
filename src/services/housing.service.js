@@ -1,6 +1,8 @@
 import axios from "axios";
+import { getToken } from "./auth.service";
 
 export async function getHousingData(){
-    const response = await axios.get("http://localhost:3000/hospedaje")
+    const token = await getToken();
+    const response = await axios.get("http://localhost:3000/hospedaje", {headers: {Authorization: token}})
     return response.data
 }   

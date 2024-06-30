@@ -6,6 +6,7 @@ import BookingView from './pages/booking/BookingView.vue';
 import HousingView from './pages/housing/HousingView.vue';
 import Todo from './components/Todo.vue';
 import LoginView from './pages/login/LoginView.vue';
+import RegisterView from './pages/register/RegisterView.vue';
 import { getToken } from './services/auth.service';
 
 export const PATHS = {
@@ -14,7 +15,7 @@ export const PATHS = {
   ROUTE_BOOKING: '/reservas'
 };
 
-export function createBarloventoRouter(){
+export function createBarloventoRouter() {
   const router = createRouter({
     history: createWebHistory(),
     routes: [
@@ -22,7 +23,7 @@ export function createBarloventoRouter(){
         path: '/',
         name: 'dahboard',
         component: AppLayout,
-  
+
         children: [
           { path: '/', component: Todo, auth: true },
           { path: PATHS.ROUTE_BOOKING, component: BookingView, auth: true },
@@ -34,18 +35,19 @@ export function createBarloventoRouter(){
         path: '/login',
         name: 'login',
         component: LoginView
-      }
+      },
+      { path: '/register', name: 'register', component: RegisterView }
     ]
   });
 
   router.beforeEach(async function (to, from, next) {
     const token = await getToken();
-  
-    if (to.path !== '/login' && !token) {
+
+    if (to.path !== '/login' && to.path !== '/register' && !token) {
       next({ path: '/login' });
       return;
     }
-    console.log(token)
+    console.log(token);
     if (to.path === '/login' && token) {
       next({ path: '/' });
       return;
@@ -53,5 +55,5 @@ export function createBarloventoRouter(){
     next();
   });
 
-  return router
+  return router;
 }
