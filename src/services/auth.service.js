@@ -1,8 +1,17 @@
 import axios from 'axios';
 
+export const AUTH_ERRORS = {
+    LOGIN: "Failed when logining"
+} 
+
 export async function login(email, password) {
-  const response = await axios.post('http://localhost:3000/login', { email, password });
-  localStorage.setItem('auth', response.data);
+  try {
+    const response = await axios.post('http://localhost:3000/login', { email, password });
+    localStorage.setItem('auth', response.data);
+    return {response}
+  } catch (error) {
+    return {error: AUTH_ERRORS.LOGIN}
+  }
 }
 
 export async function register(email, password) {
