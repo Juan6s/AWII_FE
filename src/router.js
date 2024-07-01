@@ -12,48 +12,55 @@ import { getToken } from './services/auth.service';
 export const PATHS = {
   ROUTE_GUEST: '/inquilinos',
   ROUTE_HOUSING: '/hospedajes',
-  ROUTE_BOOKING: '/reservas'
+  ROUTE_BOOKING: '/reservas',
+  ROUTE_LOGIN: '/login',
+  ROUTE_REGISTER: '/register',
+  ROUTE_HOME: '/',
 };
 
-export function createBarloventoRouter() {
-  const router = createRouter({
-    history: createWebHistory(),
-    routes: [
-      {
-        path: '/',
-        name: 'dahboard',
-        component: AppLayout,
+const router = createRouter({
+  history: createWebHistory(),
+  routes: [
+    {
+      path: PATHS.ROUTE_HOME,
+      name: 'dahboard',
+      component: AppLayout,
 
-        children: [
-          { path: '/', component: Todo, auth: true },
-          { path: PATHS.ROUTE_BOOKING, component: BookingView, auth: true },
-          { path: PATHS.ROUTE_GUEST, component: GuestView, auth: true },
-          { path: PATHS.ROUTE_HOUSING, component: HousingView, auth: true }
-        ]
-      },
-      {
-        path: '/login',
-        name: 'login',
-        component: LoginView
-      },
-      { path: '/register', name: 'register', component: RegisterView }
-    ]
-  });
+      children: [
+        { path: '/', component: Todo, auth: true },
+        { path: PATHS.ROUTE_BOOKING, component: BookingView, auth: true },
+        { path: PATHS.ROUTE_GUEST, component: GuestView, auth: true },
+        { path: PATHS.ROUTE_HOUSING, component: HousingView, auth: true }
+      ]
+    },
+    {
+      path: PATHS.ROUTE_LOGIN,
+      name: 'login',
+      component: LoginView
+    },
+    { path: '/register', name: 'register', component: RegisterView }
+  ]
+});
 
-  router.beforeEach(async function (to, from, next) {
-    const token = await getToken();
+router.beforeEach(async function (to, from, next) {
+  const token = await getToken();
 
-    if (to.path !== '/login' && to.path !== '/register' && !token) {
-      next({ path: '/login' });
-      return;
-    }
-    console.log(token);
-    if (to.path === '/login' && token) {
-      next({ path: '/' });
-      return;
-    }
-    next();
-  });
+  if (to.path !== '/login' && to.path !== '/register' && !token) {
+    next({ path: '/login' });
+    return;
+  }
 
-  return router;
+  if (to.path === '/login' && token) {
+    next({ path: '/' });
+    return;
+  }
+  next();
+});
+
+
+export function redirect(path){
+  router.replace({path})
 }
+
+export default router
+

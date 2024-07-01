@@ -1,4 +1,5 @@
-import axios from "axios";
+import axios from "./request.service"
+
 import { getToken } from "./auth.service";
 
 export async function getHousingData(){

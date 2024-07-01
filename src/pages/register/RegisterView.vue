@@ -4,7 +4,9 @@
       <div class="text-center mb-5">
         <div class="text-900 text-3xl font-medium mb-3">Bienvenido, Registrate!</div>
         <span class="text-600 font-medium line-height-3">Ya tenes cuenta? </span>
-        <a class="font-medium no-underline ml-2 text-blue-500 cursor-pointer"> <RouterLink to="/login">Ingresá!</RouterLink></a>
+        <a class="font-medium no-underline ml-2 text-blue-500 cursor-pointer">
+          <RouterLink to="/login">Ingresá!</RouterLink></a
+        >
       </div>
 
       <div>
@@ -31,10 +33,11 @@
 </template>
 
 <script setup>
-import { router } from '@/main';
+import { redirect } from '@/router';
 import { RouterLink } from 'vue-router';
 import { login, register } from '@/services/auth.service';
 import { ref } from 'vue';
+import { PATHS } from "@/router"
 
 const email = ref('');
 const password = ref('');
@@ -46,6 +49,6 @@ const onRegisterButton = async () => {
   }
   await register(email.value, password.value);
   await login(email.value, password.value);
-  router.replace({ path: '/' });
+  redirect(PATHS.ROUTE_HOME);
 };
 </script>

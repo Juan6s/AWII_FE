@@ -3,7 +3,7 @@
 
 import { createApp } from 'vue';
 import App from './App.vue';
-import { createBarloventoRouter } from './router.js';
+import router from './router';
 
 import PrimeVue from 'primevue/config';
 import AutoComplete from 'primevue/autocomplete';
@@ -117,7 +117,6 @@ import 'primeicons/primeicons.css';
 
 
 const app = createApp(App);
-export const router = createBarloventoRouter()
 
 
 app.use(PrimeVue);

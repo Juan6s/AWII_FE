@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from "./request.service"
 
 export const AUTH_ERRORS = {
     LOGIN: "Failed when logining"

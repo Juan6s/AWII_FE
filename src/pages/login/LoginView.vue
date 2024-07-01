@@ -41,10 +41,12 @@
 </template>
 
 <script setup>
-import { router } from '@/main';
+import { redirect } from '@/router';
+import { PATHS } from "@/router"
 import { login } from '@/services/auth.service';
 import { RouterLink } from 'vue-router';
 import { ref } from 'vue';
+
 const email = ref('');
 const password = ref('');
 const form = ref({ failed: false });
@@ -55,7 +57,7 @@ const onLoginButton = async () => {
     errorInForm();
     return;
   }
-  router.replace({ path: '/' });
+  redirect(PATHS.ROUTE_HOME)
 };
 
 const errorInForm = async () => {
