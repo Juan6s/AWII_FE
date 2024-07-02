@@ -4,9 +4,17 @@
       <Button label="Nueva" icon="pi pi-plus" severity="success" class="mr-2" @click="openNew" />
       <Button
         :disabled="!selectedBooking"
+        label="Editar"
+        icon="pi pi-pencil"
+        severity="warning"
+        class="mr-2"
+        @click="openEdit"
+      />
+      <Button
+        :disabled="!selectedBooking"
         label="Eliminar"
-        icon="pi pi-plus"
-        severity="success"
+        icon="pi pi-times"
+        severity="danger"
         class="mr-2"
         @click="openDelete"
       />
@@ -159,11 +167,61 @@
       <Button label="Save" icon="pi pi-check" @click="onDeleteBooking" />
     </template>
   </Dialog>
+
+  <Dialog
+    v-model:visible="editBookingDialog"
+    :style="{ width: '300px' }"
+    header="Detalle reserva"
+    :modal="true"
+  >
+    <div class="ml-3">
+      <div class="field">
+        <label for="calendar" class="w-full">Rango de fechas</label>
+        <Calendar
+          id="calendar"
+          v-model="booking.dates"
+          selectionMode="range"
+          :manualInput="false"
+          class="w-full"
+        />
+      </div>
+
+      <div class="field">
+        <label for="guest" class="w-full">Eleji el inquilino</label>
+        <AutoComplete
+          id="guest"
+          v-model="booking.guest"
+          dropdown
+          :suggestions="guests"
+          optionLabel="name"
+          @complete="search"
+          class="w-full"
+        />
+      </div>
+
+      <div class="field">
+        <label for="housing" class="w-full">Eleji la cabaña</label>
+        <Dropdown
+          id="housing"
+          v-model="booking.housing"
+          :options="housings"
+          optionLabel="name"
+          placeholder="Selecciona una cabaña"
+          class="w-full"
+        />
+      </div>
+    </div>
+
+    <template #footer>
+      <Button label="Cancel" icon="pi pi-times" text @click="hideDialog" />
+      <Button label="Save" icon="pi pi-check" @click="editBooking" />
+    </template>
+  </Dialog>
 </template>
 
 <script setup>
 import { ref, onMounted } from 'vue';
-import { createBooking, getBookingData, deleteBooking } from '../../services/booking.service';
+import { createBooking, getBookingData, deleteBooking, putBooking } from '../../services/booking.service';
 import { getGuestData } from '../../services/guest.service';
 import { FilterMatchMode } from 'primevue/api';
 import { getHousingData } from '../../services/housing.service';
@@ -190,7 +248,8 @@ const filters = ref({
 const loading = ref();
 const booking = ref({});
 const submitBookingDialog = ref(false);
-const confirmDialog = ref(false)
+const editBookingDialog = ref(false);
+const confirmDialog = ref(false);
 const submitted = ref(false);
 const housings = ref();
 const guests = ref({});
@@ -220,8 +279,15 @@ const openNew = () => {
 };
 
 const openDelete = () => {
-  confirmDialog.value = true
-}
+  confirmDialog.value = true;
+};
+
+const openEdit = () => {
+  booking.value = {
+    guest: selectedBooking.value.guestName
+  };
+  editBookingDialog.value = true;
+};
 
 const saveBooking = async () => {
   const bookingDetails = booking.value;
@@ -237,9 +303,22 @@ const saveBooking = async () => {
   submitted.value = true;
 };
 
+const editBooking = async () => {
+  const bookingDetails = booking.value;
+  await putBooking(
+    selectedBooking.value.id,
+    bookingDetails.dates[0],
+    bookingDetails.dates[1],
+    bookingDetails.guest.id,
+    bookingDetails.housing.id
+  );
+  editBookingDialog.value = false
+
+};
+
 const onDeleteBooking = async () => {
-  deleteBooking(selectedBooking.value.id)
-}
+  deleteBooking(selectedBooking.value.id);
+};
 
 const search = async (event) => {
   const guestsData = await getGuestData();
