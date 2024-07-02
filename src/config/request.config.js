@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { deleteToken } from './auth.service';
+import { deleteToken } from '../services/auth.service';
 import { PATHS, redirect } from '@/router';
 
 axios.interceptors.response.use(function (response) {

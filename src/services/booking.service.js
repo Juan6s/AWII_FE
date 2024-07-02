@@ -1,4 +1,4 @@
-import axios from './request.service';
+import axios from '../config/request.config';
 
 import { getToken } from './auth.service';
 
