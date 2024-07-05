@@ -23,7 +23,7 @@
 
   <Dialog
     v-model:visible="submitGuestDialog"
-    :style="{ width: '300px', height: '700px' }"
+    :style="{ width: '300px' }"
     header="Detalle inquilino"
     :modal="true"
   >
@@ -34,7 +34,7 @@
       </div>
       <div class="field">
         <label for="dni" class="w-full">DNI</label>
-        <InputText id="dni" v-model="newGuest.dni" />
+        <InputNumber id="dni" v-model="newGuest.dni" />
       </div>
       <div class="field">
         <label for="phone" class="w-full">Telefono</label>
@@ -70,9 +70,9 @@ const openNew = () => {
   submitGuestDialog.value = true;
 };
 
-const saveGuest =async() => {
-  const {name, dni, phone} = newGuest.value
-  await createGuest(name, phone, dni)
+const saveGuest = async () => {
+  const { name, dni, phone } = newGuest.value;
+  await createGuest(name, phone, dni);
   submitGuestDialog.value = false;
-}
+};
 </script>
