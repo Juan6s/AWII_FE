@@ -299,7 +299,7 @@ const saveBooking = async () => {
   );
 
   await mapData();
-  productDialog.value = false;
+  submitBookingDialog.value = false;
   submitted.value = true;
 };
 
