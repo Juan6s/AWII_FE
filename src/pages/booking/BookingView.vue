@@ -298,7 +298,7 @@ const saveBooking = async () => {
     bookingDetails.housing.id
   );
 
-  await mapData();
+  bookings.value = await mapData();
   submitBookingDialog.value = false;
   submitted.value = true;
 };
