@@ -19,7 +19,7 @@ export async function createBooking(startDate, endDate, guestId, housingId) {
     housing: housingId
   };
 
-  console.log(data)
+
   const respoonse = await axios.post('http://localhost:3000/reserva', data, {
     headers: { Authorization: token }
   });

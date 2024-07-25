@@ -16,6 +16,7 @@
         <template #content>
           <p><b>Ubicacion:</b> {{ house.location }}</p>
           <p><b>Precio Noche:</b> ${{ house.pricing }}</p>
+          <Image preview class="flex justify-content-center" image-class="w-10" alt="image" :src="house.image">Ver imagen</Image>
         </template>
       </Card>
     </div>
@@ -40,6 +41,10 @@
         <label for="location" class="w-full">Ubicacion</label>
         <InputText id="location" v-model="newHousing.location" />
       </div>
+      <div class="field">
+        <label for="image" class="w-full">Url imagen</label>
+        <InputText id="image" v-model="newHousing.image" />
+      </div>
     </div>
 
     <template #footer>
@@ -59,6 +64,7 @@ const modalNewHousing = ref(false);
 
 onMounted(async () => {
   housings.value = await getHousingData();
+  console.log(housings.value);
 });
 
 const openNew = () => {
@@ -66,8 +72,8 @@ const openNew = () => {
 };
 
 const saveHousing = async () => {
-  const { name, price, location } = newHousing.value;
-  await createHousing(name, price, location);
+  const { name, price, location, image } = newHousing.value;
+  await createHousing(name, price, location, image);
   modalNewHousing.value = false;
 };
 </script>
