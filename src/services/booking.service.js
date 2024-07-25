@@ -14,10 +14,12 @@ export async function createBooking(startDate, endDate, guestId, housingId) {
   const token = await getToken();
   const data = {
     checkInDate: startDate.toISOString(),
-    checkOutdate: endDate.toISOString(),
+    checkOutDate: endDate.toISOString(),
     guest: guestId,
     housing: housingId
   };
+
+  console.log(data)
   const respoonse = await axios.post('http://localhost:3000/reserva', data, {
     headers: { Authorization: token }
   });
