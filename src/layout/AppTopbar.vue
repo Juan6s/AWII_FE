@@ -1,7 +1,7 @@
 <script setup>
 import { ref, computed, onMounted, onBeforeUnmount } from 'vue';
 import { useLayout } from '@/layout/composables/layout';
-import { useRouter } from 'vue-router';
+import { RouterLink, useRouter } from 'vue-router';
 
 const { layoutConfig, onMenuToggle } = useLayout();
 
@@ -18,7 +18,7 @@ onBeforeUnmount(() => {
 });
 
 const onTopBarMenuButton = () => {
-    topbarMenuActive.value = !topbarMenuActive.value;
+    window.open("https://calendar.google.com/calendar/embed?src=d597da2b6ed8d35c1aca76046577ebaf8f29a2426539ae43cbfedd6442146037%40group.calendar.google.com&ctz=America%2FArgentina%2FCordoba")
 };
 const onSettingsClick = () => {
     topbarMenuActive.value = false;
@@ -75,14 +75,6 @@ const isOutsideClicked = (event) => {
             <button @click="onTopBarMenuButton()" class="p-link layout-topbar-button">
                 <i class="pi pi-calendar"></i>
                 <span>Calendar</span>
-            </button>
-            <button @click="onTopBarMenuButton()" class="p-link layout-topbar-button">
-                <i class="pi pi-user"></i>
-                <span>Profile</span>
-            </button>
-            <button @click="onSettingsClick()" class="p-link layout-topbar-button">
-                <i class="pi pi-cog"></i>
-                <span>Settings</span>
             </button>
         </div>
     </div>
